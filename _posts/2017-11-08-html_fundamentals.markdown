@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "html fundamentals"
-date:       2017-11-09 03:23:06 +0000
+date:       2017-11-08 22:23:07 -0500
 permalink:  html_fundamentals
 ---
 
