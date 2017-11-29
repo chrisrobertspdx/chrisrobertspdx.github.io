@@ -6,7 +6,7 @@ permalink:  cli_gem_project
 ---
 
 
-My gem is called Race Finder. As the name suggests it scrapes the racecenter web site for a list of current races, presents a list of these races and gives the user the opportunity to get more informations about a particular race. Version 2.0 will give the user the chance to generate the initial race list based on type and location. This is what it looks like:
+My gem is called Race Finder. As the name suggests it scrapes the racecenter web site for a list of current races, presents a list of these races and gives the user the opportunity to get more information about a particular race. Version 2.0 will give the user the chance to generate the initial race list based on type and location. This is what it looks like:
 
 ```
 1. Seward Solstice Trail Run
@@ -34,11 +34,11 @@ To get the project started I typed:
 bundle gem race_center
 ```
 
-This command created the directory structure and base files for the project. One thing to keep in mind is that bundle initializes a git repo for the gem. I made the mistake of initializing a git repo before running bundle gem and it created some problems and confusion.
+This command created the directory structure and base files for the project. One thing to keep in mind is that bundle initializes a git repo for the gem. I made the mistake of initializing a git repo before running bundle gem and it caused numerous problems and headaches.
 
-I ended up the 4 classes: calendar, race, scraper and CLI. The calendar and race class instantiate typical database type objects that hold the information like date, location, type etc. The CLI creates the menu that the user interacts with and also is in charge of employing the scraper to initialize the calendar and get more information when prompted. 
+I ended up the 4 classes: calendar, race, scraper and CLI. The calendar and race classes instantiate typical database type objects that hold the information like date, location, type etc. The CLI creates the menu that the user interacts with and also is in charge of employing the scraper methods to initialize the calendar and get more race information when prompted. 
 
-The scraper builds an array of hashes - each hash corresponds to a race. The CLI is able to take this array and build all of the race instances that belong to the calendar. Here is one of my scraper functions. As is typical with scraping there is usually some sort of edge case that will break the pattern. In this case racecenter slapped an advertisement in the middle of the calendar table. Luckily it had an ID of "gad".
+The initial scrape builds an array of hashes - each hash corresponds to a race. The CLI is able to take this array and build all of the race instances that belong to the calendar. Here is one of my scraper functions. As is typical with scraping there is usually some sort of edge case that will break the pattern. In this case racecenter slapped an advertisement in the middle of the calendar table. Luckily it had an ID of "gad".
 
 ```
   def self.scrape_index(index)
@@ -62,7 +62,7 @@ The scraper builds an array of hashes - each hash corresponds to a race. The CLI
   end
 ```
 
-I did use the generic metaprogramming approach for initializing data instances since this will make it easier to add / remove attributes in the future.
+I did use the generic metaprogramming approach for initializing race instances since this will make it easier to add / remove attributes in the future.
 
 ```
 class RaceFinder::Race
@@ -109,4 +109,4 @@ For some reason bundle creates a bin directory but looks for the gem executable 
 git ls-files -z`.split("\x0").reject
 ```
 
-That is pretty much it. I could never get rubygems to accept my gem so it exists only a local.
+That is pretty much it. I could never get rubygems to accept my gem so it exists only as local.
