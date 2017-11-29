@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "cli gem project"
-date:       2017-11-29 20:25:08 +0000
+date:       2017-11-29 15:25:08 -0500
 permalink:  cli_gem_project
 ---
 
@@ -38,7 +38,31 @@ This command created the directory structure and base files for the project. One
 
 I ended up the 4 classes: calendar, race, scraper and CLI. The calendar and race class instantiate typical database type objects that hold the information like date, location, type etc. The CLI creates the menu that the user interacts with and also is in charge of employing the scraper to initialize the calendar and get more information when prompted. 
 
-I did use the generic metaprogramming approach for initializing instances since this will make it easier to add / remove attributes in the future.
+The scraper builds an array of hashes - each hash corresponds to a race. The CLI is able to take this array and build all of the race instances that belong to the calendar. Here is one of my scraper functions. As is typical with scraping there is usually some sort of edge case that will break the pattern. In this case racecenter slapped an advertisement in the middle of the calendar table. Luckily it had an ID of "gad".
+
+```
+  def self.scrape_index(index)
+    races = []
+    html_block = self.get_page(index).css("table#calendarlist tr")
+    html_block.each {|r|
+      #binding.pry
+      d = r.css("td")
+        if d.size > 0 && d[0]["class"] != "gad" #google ad
+            #binding.pry
+            races << {
+                :type => d[0].text,
+                :date => d[1].text,
+                :name => d[2].text,
+                :url => d[2].css("a").attribute("href").value,
+                :location => d[3].text
+            }
+        end
+    }
+    races
+  end
+```
+
+I did use the generic metaprogramming approach for initializing data instances since this will make it easier to add / remove attributes in the future.
 
 ```
 class RaceFinder::Race
@@ -79,7 +103,7 @@ I followed the tutorial which instructed me to fill out my gemspec and make sure
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
 ```
 
-For some reason bundle creates a bin directory but looks for the gem executable in an exe subdirectory. Once I figured this out you can change **exe** to **bin**. If you have created a file in the bin that is shares the name of your gem you should be good to go. One other thing to keep in mind is that your git repo must be up to date when you build the gem. Otherwise it may miss an important file when it updates your path which lets you simply call race_center after you install the gem.
+For some reason bundle creates a bin directory but looks for the gem executable in an exe subdirectory. Once I figured this out you can change **exe** to **bin**. If you have created a file in the bin that shares the name of your gem you should be good to go. One other thing to keep in mind is that your git repo must be up to date when you build the gem. Otherwise it may miss an important file when it updates your path which lets you simply call **gem name** from bash after you install the gem.
 
 ```
 git ls-files -z`.split("\x0").reject
