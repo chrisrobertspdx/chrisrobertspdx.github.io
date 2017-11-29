@@ -1,12 +1,12 @@
 ---
 layout: post
-title:      "cli gem project"
+title:      "RaceFinder: a cli gem project"
 date:       2017-11-29 15:25:08 -0500
 permalink:  cli_gem_project
 ---
 
 
-My gem is called Race Finder. As the name suggests it scrapes the racecenter web site for a list of current races, presents a list of these races and gives the user the opportunity to get more information about a particular race. Version 2.0 will give the user the chance to generate the initial race list based on type and location. This is what it looks like:
+My gem is called Race Finder. As the name suggests it scrapes the [racecenter web site](http://www.racecenter.com) for a list of current races, presents a list of these races and gives the user the opportunity to get more information about a particular race. Version 2.0 will give the user the chance to generate the initial race list based on type and location. This is what the interface looks like:
 
 ```
 1. Seward Solstice Trail Run
