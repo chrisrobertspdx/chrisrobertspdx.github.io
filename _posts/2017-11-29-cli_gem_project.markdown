@@ -38,7 +38,7 @@ This command created the directory structure and base files for the project. One
 
 I ended up the 4 classes: calendar, race, scraper and CLI. The calendar and race classes instantiate typical database type objects that hold the information like date, location, type etc. The CLI creates the menu that the user interacts with and also is in charge of employing the scraper methods to initialize the calendar and get more race information when prompted. 
 
-The initial scrape builds an array of hashes - each hash corresponds to a race. The CLI is able to take this array and build all of the race instances that belong to the calendar. Here is one of my scraper functions. As is typical with scraping there is usually some sort of edge case that will break the pattern. In this case racecenter slapped an advertisement in the middle of the calendar table. Luckily it had an **class** of "gad".
+The initial scrape builds an array of hashes - each hash corresponds to a race. The CLI is able to take this array and build all of the race instances that belong to the calendar. Here is one of my scraper functions. As is typical with scraping there is usually some sort of edge case that will break the pattern. In this case racecenter slapped an advertisement in the middle of the calendar table. Luckily it had a **class** of "gad".
 
 ```
   def self.scrape_index(index)
@@ -96,20 +96,20 @@ There was one little wrinkle with the description field. I decided that I would 
 ```
 
 It was not that difficult to get this thing working in the bin console. The challenge came when it was time to build the gem.
-I followed the tutorial which instructed me to fill out my gemspec and make sure I add the required depencies as either development or runtime. Building the gem was as simple as **gem build race_finder**. But uh-oh when I try to run the gem I get command not found. After a lot of face planting on my keyboard I found the two key lines on the gemspec.
+I followed the tutorial which instructed me to fill out my gemspec and make sure I add the required depencies as either development or runtime. Building the gem was as simple as **gem build race_finder**. But uh-oh when I tried to run the gem I received an error: command not found. After a lot of face planting on my keyboard, whining on Slack and combing Stack Overflow I was directed to these two key lines in the gemspec:
 
 ```
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
 ```
 
-For some reason bundle creates a bin directory but looks for the gem executable in an exe subdirectory. After figuring this out I changed **exe** to **bin**. Be sure to create a file in the bin that shares the name of your gem and initializes the application.
+For some reason bundle creates a bin subdirectory but looks for the gem executable in an exe subdirectory. After figuring this out I changed **exe** to **bin**. Be sure to create a file in the bin that shares the name of your gem and initializes the application.
 
 ```
 RaceFinder::CLI.new.run
 ```
 
-One other thing to keep in mind is that your git repo must be up to date when you build the gem. Otherwise it may miss an important file when it updates your path which lets you simply call **gem name** from bash after you install the gem.
+One other thing to keep in mind is that your git repo must be up to date when you build the gem. Otherwise it may miss an important file when it updates your path which is what lets you simply call **gem name** from bash after you install the gem.
 
 ```
 git ls-files -z`.split("\x0").reject
