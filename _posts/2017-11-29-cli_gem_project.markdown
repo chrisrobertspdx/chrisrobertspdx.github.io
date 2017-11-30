@@ -38,7 +38,7 @@ This command created the directory structure and base files for the project. One
 
 I ended up the 4 classes: calendar, race, scraper and CLI. The calendar and race classes instantiate typical database type objects that hold the information like date, location, type etc. The CLI creates the menu that the user interacts with and also is in charge of employing the scraper methods to initialize the calendar and get more race information when prompted. 
 
-The initial scrape builds an array of hashes - each hash corresponds to a race. The CLI is able to take this array and build all of the race instances that belong to the calendar. Here is one of my scraper functions. As is typical with scraping there is usually some sort of edge case that will break the pattern. In this case racecenter slapped an advertisement in the middle of the calendar table. Luckily it had an ID of "gad".
+The initial scrape builds an array of hashes - each hash corresponds to a race. The CLI is able to take this array and build all of the race instances that belong to the calendar. Here is one of my scraper functions. As is typical with scraping there is usually some sort of edge case that will break the pattern. In this case racecenter slapped an advertisement in the middle of the calendar table. Luckily it had an **class** of "gad".
 
 ```
   def self.scrape_index(index)
@@ -103,10 +103,16 @@ I followed the tutorial which instructed me to fill out my gemspec and make sure
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
 ```
 
-For some reason bundle creates a bin directory but looks for the gem executable in an exe subdirectory. Once I figured this out you can change **exe** to **bin**. If you have created a file in the bin that shares the name of your gem you should be good to go. One other thing to keep in mind is that your git repo must be up to date when you build the gem. Otherwise it may miss an important file when it updates your path which lets you simply call **gem name** from bash after you install the gem.
+For some reason bundle creates a bin directory but looks for the gem executable in an exe subdirectory. After figuring this out I changed **exe** to **bin**. Be sure to create a file in the bin that shares the name of your gem and initializes the application.
+
+```
+RaceFinder::CLI.new.run
+```
+
+One other thing to keep in mind is that your git repo must be up to date when you build the gem. Otherwise it may miss an important file when it updates your path which lets you simply call **gem name** from bash after you install the gem.
 
 ```
 git ls-files -z`.split("\x0").reject
 ```
 
-That is pretty much it. I could never get rubygems to accept my gem so it exists only as local.
+That is pretty much it. I would like a better understanding of the enviroment. Also I could never get rubygems to accept my gem so it exists only as local.
