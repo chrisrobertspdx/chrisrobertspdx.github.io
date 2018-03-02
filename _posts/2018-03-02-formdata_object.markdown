@@ -26,7 +26,7 @@ Sweet. This turns out to be a simple and painless way to upload photos with eith
 
 Thanks! Happy Coding.
 
-**Additional Resources**
+##Additional Resources##
 
 * [https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects](http://)
 * [https://robots.thoughtbot.com/ridiculously-simple-ajax-uploads-with-formdata](http://)
