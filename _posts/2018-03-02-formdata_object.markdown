@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "FormData Object"
-date:       2018-03-02 22:04:14 +0000
+date:       2018-03-02 17:04:15 -0500
 permalink:  formdata_object
 ---
 
@@ -27,6 +27,6 @@ Sweet. This turns out to be a simple and painless way to upload photos with eith
 Thanks! Happy Coding.
 
 **Additional Resources**
-https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
-https://robots.thoughtbot.com/ridiculously-simple-ajax-uploads-with-formdata
-https://www.sitepoint.com/easier-ajax-html5-formdata-interface/
+* [https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects](http://)
+* [https://robots.thoughtbot.com/ridiculously-simple-ajax-uploads-with-formdata](http://)
+* [https://www.sitepoint.com/easier-ajax-html5-formdata-interface/](http://)
