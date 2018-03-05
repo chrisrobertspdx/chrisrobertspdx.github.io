@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Rails Park Explorer "
-date:       2018-03-05 15:42:11 +0000
+date:       2018-03-05 10:42:12 -0500
 permalink:  rails_park_explorer
 ---
 
@@ -31,7 +31,7 @@ I did pretty poor job explaining my custom attribute writer and GIT commit histo
 I am not looking forward to working with my app for the jquery project and will probably have to do a full tear down rebuild.
 
 **Supporting Docs**
-https://www.adrianprieto.com/how-to-setup-devise-and-omniauth-for-your-rails-application/
-https://github.com/carrierwaveuploader/carrierwave
+* https://www.adrianprieto.com/how-to-setup-devise-and-omniauth-for-your-rails-application/
+* https://github.com/carrierwaveuploader/carrierwave
 
 
